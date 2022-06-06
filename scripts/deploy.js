@@ -69,7 +69,7 @@ const tenthETH = ethers.BigNumber.from(ethers.utils.parseEther("0.1")); // 0.1 E
 const percentETH = ethers.BigNumber.from(ethers.utils.parseEther("0.01")); // 0.01 ETH
 const millesimalETH = ethers.BigNumber.from(ethers.utils.parseEther("0.001")); // 0.001 ETH
 
-const premium = tenThousandsETH;
+const premium = oneETH;
 const decreaseDuration = ethers.BigNumber.from(90 * DAYS);
 const decreaseRate = premium.div(decreaseDuration);
 

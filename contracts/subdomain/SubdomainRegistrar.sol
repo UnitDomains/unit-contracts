@@ -81,7 +81,6 @@ contract SubdomainRegistrar is ISubdomainRegistrar, Ownable {
     ) external {
         address subdomainOwner = msg.sender;
         bytes32 subdomainLabel = keccak256(bytes(subdomain));
-        bytes32 subnode = keccak256(abi.encodePacked(label, subdomainLabel));
 
         // Subdomain must not be registered already.
         require(
@@ -101,12 +100,7 @@ contract SubdomainRegistrar is ISubdomainRegistrar, Ownable {
             Resolver(resolver)
         );
 
-        emit NewSubdomainRegistration(
-            label,
-            subdomain,
-            subnode,
-            subdomainOwner
-        );
+        emit NewSubdomainRegistration(label, subdomain, subdomainOwner);
     }
 
     function deleteSubdomain(bytes32 node, bytes32 label) external {

@@ -107,7 +107,7 @@ contract ENSRegistry is IENS {
         address _owner
     ) public virtual override authorised(node) returns (bytes32) {
         _setOwner(nodehash, _owner);
-        emit NewOwner(node, nodehash, _owner);
+        emit NewTLDOwner(node, nodehash, _owner);
         return nodehash;
     }
 

@@ -82,8 +82,10 @@ contract ReverseRegistrar is Ownable, Controllable, IReverseRegistrar {
         bytes32 reverseNode = keccak256(
             abi.encodePacked(ADDR_REVERSE_NODE, labelHash)
         );
-        emit ReverseClaimed(addr, reverseNode);
+
         ens.setSubnodeRecord(ADDR_REVERSE_NODE, labelHash, _owner, resolver, 0);
+
+        emit ReverseClaimed(addr, reverseNode);
 
         return reverseNode;
     }

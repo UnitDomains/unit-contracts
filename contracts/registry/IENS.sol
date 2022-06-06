@@ -5,6 +5,12 @@ interface IENS {
     // Logged when the owner of a node assigns a new owner to a subnode.
     event NewOwner(bytes32 indexed node, bytes32 indexed label, address owner);
 
+    event NewTLDOwner(
+        bytes32 indexed node,
+        bytes32 indexed nodelabel,
+        address owner
+    );
+
     // Logged when the owner of a node transfers ownership to a new account.
     event Transfer(bytes32 indexed node, address owner);
 

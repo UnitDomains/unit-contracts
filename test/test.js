@@ -321,6 +321,14 @@ describe("NameWrapper", function () {
            await setGreetingTx.wait();
 
            expect(await greeter.greet()).to.equal("Hola, mundo!");*/
+
+    console.log(await baseRegistrar.baseNodes(0));
+    console.log(await baseRegistrar.getBaseNodesLength());
+  });
+
+  it("Should report baseRegistrar baseNodes info", async function () {
+    console.log(await baseRegistrar.baseNodes(0));
+    console.log(await baseRegistrar.getBaseNodesLength());
   });
 
   it("should report unused names as available", async () => {
@@ -462,11 +470,14 @@ describe("NameWrapper", function () {
     ).to.equal(true);
 
     //register x.123.abcde.cat
-    await subdomainRegistrar.register(
+    let tx = await subdomainRegistrar.register(
       namehash.hash("123.abcde." + domainNames[0]),
       "x",
       resolver.address
     );
+
+    let receipt = await tx.wait();
+    console.log(receipt.events);
 
     expect(
       await subdomainRegistrar.available(

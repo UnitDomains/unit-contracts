@@ -5,7 +5,6 @@ interface ISubdomainRegistrar {
     event NewSubdomainRegistration(
         bytes32 indexed label,
         string subdomain,
-        bytes32 indexed subdomainLabel,
         address indexed owner
     );
 

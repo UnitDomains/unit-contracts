@@ -65,6 +65,7 @@ const thousandETH = ethers.BigNumber.from(ethers.utils.parseEther("1000.0")); //
 const hundredETH = ethers.BigNumber.from(ethers.utils.parseEther("100.0")); // 100 ETH
 const tenETH = ethers.BigNumber.from(ethers.utils.parseEther("10.0")); // 10 ETH
 const oneETH = ethers.BigNumber.from(ethers.utils.parseEther("1.0")); // 1 ETH
+const halfETH = ethers.BigNumber.from(ethers.utils.parseEther("0.5")); // 0.5 ETH
 const tenthETH = ethers.BigNumber.from(ethers.utils.parseEther("0.1")); // 0.1 ETH
 const percentETH = ethers.BigNumber.from(ethers.utils.parseEther("0.01")); // 0.01 ETH
 const millesimalETH = ethers.BigNumber.from(ethers.utils.parseEther("0.001")); // 0.001 ETH
@@ -194,10 +195,10 @@ async function main() {
   priceOracle = await LinearPremiumPriceOracle.deploy(
     dummyOracle.address,
     0, //PaymentTypes.PaymentInEth,
-    [thousandETH, hundredETH, oneETH, tenthETH, 0], //Register price
+    [hundredETH, tenETH, oneETH, tenthETH, 0], //Register price
     [
       oneETH.div(duration), //Rent price:1 char,1ETH
-      oneETH.div(duration), //Rent price:2 char,1ETH
+      halfETH.div(duration), //Rent price:2 char,0.5ETH
       tenthETH.div(duration), //Rent price:3 char,0.1ETH
       percentETH.div(duration), //Rent price:4 char,0.01ETH
       millesimalETH.div(duration), //Rent price:>=5 char,0.001ETH

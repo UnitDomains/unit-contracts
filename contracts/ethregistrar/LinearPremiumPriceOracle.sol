@@ -16,7 +16,7 @@ contract LinearPremiumPriceOracle is StablePriceOracle {
         bytes4(keccak256("timeUntilPremium(uint,uint"));
 
     constructor(
-        AggregatorInterface _usdOracle,
+        IPriceAggregator _usdOracle,
         PaymentTypes _paymentType,
         uint256[] memory _registerPrices,
         uint256[] memory _rentPrices,

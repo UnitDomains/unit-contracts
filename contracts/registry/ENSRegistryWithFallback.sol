@@ -18,7 +18,6 @@ contract ENSRegistryWithFallback is ENSRegistry {
     }
 
     /**
-     * 下面方法大多都是判断在新的ens中有没有对应记录，没有就是旧ens合约中的信息
      * @dev Returns the address of the resolver for the specified node.
      * @param node The specified node.
      * @return address of the resolver.

@@ -2,13 +2,10 @@
 pragma solidity >=0.8.13;
 
 import "./IPriceOracle.sol";
+import "./IPriceAggregator.sol";
 import "./SafeMath.sol";
 import "./StringUtils.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-
-interface AggregatorInterface {
-    function latestAnswer() external view returns (int256);
-}
 
 // StablePriceOracle sets a price in USD, based on an oracle.
 contract StablePriceOracle is Ownable, IPriceOracle {
@@ -25,7 +22,7 @@ contract StablePriceOracle is Ownable, IPriceOracle {
     uint256[] public registerPrices;
 
     // Oracle address
-    AggregatorInterface public usdOracle;
+    IPriceAggregator public usdOracle;
 
     event OracleChanged(address oracle);
 
@@ -44,7 +41,7 @@ contract StablePriceOracle is Ownable, IPriceOracle {
         );
 
     constructor(
-        AggregatorInterface _usdOracle,
+        IPriceAggregator _usdOracle,
         PaymentTypes _paymentType,
         uint256[] memory _registerPrices,
         uint256[] memory _rentPrices
@@ -123,7 +120,7 @@ contract StablePriceOracle is Ownable, IPriceOracle {
      * @dev Sets the price oracle address
      * @param _usdOracle The address of the price oracle to use.
      */
-    function setOracle(AggregatorInterface _usdOracle) public onlyOwner {
+    function setOracle(IPriceAggregator _usdOracle) public onlyOwner {
         usdOracle = _usdOracle;
         emit OracleChanged(address(_usdOracle));
     }

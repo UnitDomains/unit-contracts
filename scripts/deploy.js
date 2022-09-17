@@ -128,13 +128,7 @@ async function main() {
   console.log(`setOwner on ens contract (tx: ${tx.hash})...`);
   await tx.wait();
 
-  //BulkRenewal Contract
-  //const BulkRenewal = await hre.ethers.getContractFactory("BulkRenewal");
-  //const bulkRenewal = await BulkRenewal.deploy(ens.address);
-  //await bulkRenewal.deployed();
-  //console.log("bulkRenewal address:" + bulkRenewal.address)
-
-  //部署注册器
+  //BaseRegistrar Contract
   const BaseRegistrar = await hre.ethers.getContractFactory(
     "BaseRegistrarImplementation"
   );
@@ -154,7 +148,7 @@ async function main() {
   parsedFile.REGISTRAR_ADDRESS = baseRegistrar.address;
   console.log("baseRegistrar address:" + baseRegistrar.address);
 
-  //subdomain
+  //SubdomainRegistrar Contract
   const SubdomainRegistrar = await hre.ethers.getContractFactory(
     "SubdomainRegistrar"
   );
@@ -179,6 +173,7 @@ async function main() {
     await tx.wait();
   }
 
+  //Deploy the price oracle
   const DummyOracle = await hre.ethers.getContractFactory("DummyOracle");
   const dummyOracle = await DummyOracle.deploy(
     ethers.BigNumber.from("50000000000000000")
@@ -187,7 +182,6 @@ async function main() {
   parsedFile.DUMMY_ORACLE_ADDRESS = dummyOracle.address;
   console.log("dummyOracle address:" + dummyOracle.address);
 
-  //部署价格语言机
   const duration = calculateDuration(1);
   const LinearPremiumPriceOracle = await hre.ethers.getContractFactory(
     "LinearPremiumPriceOracle"
@@ -210,7 +204,6 @@ async function main() {
   parsedFile.PRICE_ORACLE_ADDRESS = priceOracle.address;
   console.log("LinearPremiumPriceOracle address:" + priceOracle.address);
 
-  //部署控制器
   const ETHRegistrarController = await hre.ethers.getContractFactory(
     "ETHRegistrarController"
   );
@@ -232,7 +225,6 @@ async function main() {
   console.log(`setPriceOracle on controller contract (tx: ${tx.hash})...`);
   await tx.wait();
 
-  //部署反向解析器
   const ReverseRegistrar = await hre.ethers.getContractFactory(
     "ReverseRegistrar"
   );
@@ -280,7 +272,6 @@ async function main() {
   parsedFile.RESOLVER_ADDRESS = resolver.address;
   console.log("resolver address:" + resolver.address);
 
-  //设置根节点解析器
   tx = await root.setResolver(resolver.address);
   console.log(`setResolver on root contract (tx: ${tx.hash})...`);
   await tx.wait();

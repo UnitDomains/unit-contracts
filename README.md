@@ -40,3 +40,9 @@ Then, copy the deployment address and paste it in to replace `DEPLOYED_CONTRACT_
 ```shell
 npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
 ```
+
+# Build
+Rinkeby network:
+npx hardhat run .\scripts\deploy.js --network rinkeby
+
+

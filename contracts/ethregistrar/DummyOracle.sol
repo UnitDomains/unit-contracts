@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.13;
 
-contract DummyOracle {
+import "./IPriceAggregator.sol";
+
+contract DummyOracle is IPriceAggregator {
     int256 value;
 
     constructor(int256 _value) {
@@ -12,7 +14,7 @@ contract DummyOracle {
         value = _value;
     }
 
-    function latestAnswer() public view returns (int256) {
+    function latestAnswer() public view override returns (int256) {
         return value;
     }
 }

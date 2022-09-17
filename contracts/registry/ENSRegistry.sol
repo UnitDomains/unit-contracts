@@ -127,7 +127,6 @@ contract ENSRegistry is IENS {
     }
 
     /**
-     * 设置TTL，时间为秒
      * @dev Sets the TTL for the specified node.
      * @param node The node to update.
      * @param _ttl The TTL in seconds.

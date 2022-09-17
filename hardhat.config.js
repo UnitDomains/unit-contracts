@@ -1,5 +1,5 @@
 require("dotenv").config();
-require('hardhat-abi-exporter');
+require("hardhat-abi-exporter");
 require("@nomiclabs/hardhat-etherscan");
 require("@nomiclabs/hardhat-waffle");
 require("hardhat-gas-reporter");
@@ -15,8 +15,6 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   }
 });
 
-
-
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 
@@ -25,28 +23,36 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  */
 module.exports = {
   solidity: {
-    compilers: [{
-      version: "0.8.13",
-      settings: {
-        optimizer: {
-          enabled: true,
-          runs: 10000,
-        }
-      }
-    }]
+    compilers: [
+      {
+        version: "0.8.13",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 10000,
+          },
+        },
+      },
+    ],
   },
   networks: {
-    localhost: {
-
+    localhost: {},
+    mainnet: {
+      url: process.env.MAINNET_URL,
+      accounts: [process.env.MAINNET_DEPLOYER_KEY],
     },
     ropsten: {
       url: process.env.ROPSTEN_URL,
-      accounts: [process.env.DEPLOYER_KEY, process.env.OWNER_KEY],
+      accounts: [process.env.ROPSTEN_DEPLOYER_KEY],
     },
     rinkeby: {
       url: process.env.RINKEBY_URL,
-      accounts: [process.env.RINKEBY_DEPLOYER_KEY, process.env.RINKEBY_DEPLOYER_KEY],
-    }
+      accounts: [process.env.RINKEBY_DEPLOYER_KEY],
+    },
+    goerli: {
+      url: process.env.GOERLI_URL,
+      accounts: [process.env.GOERLI_DEPLOYER_KEY],
+    },
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
@@ -56,9 +62,9 @@ module.exports = {
     apiKey: process.env.ETHERSCAN_API_KEY,
   },
   abiExporter: {
-    path: './build/contracts',
+    path: "./build/contracts",
     clear: true,
     flat: true,
-    spacing: 2
+    spacing: 2,
   },
 };

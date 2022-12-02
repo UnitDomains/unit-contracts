@@ -22,7 +22,7 @@ contract BaseRegistrarImplementation is ERC721, IBaseRegistrar, Ownable {
     // A map of addresses that are authorised to register and renew names.
     mapping(address => bool) public controllers;
 
-    uint256 public constant GRACE_PERIOD = 90 days; //宽限期为90天
+    uint256 public constant GRACE_PERIOD = 90 days;
 
     bytes4 private constant INTERFACE_META_ID =
         bytes4(keccak256("supportsInterface(bytes4)"));
